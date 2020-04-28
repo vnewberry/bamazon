@@ -10,14 +10,19 @@ The app showcases the power of using SQL in conjuction with node to create a dyn
 <h2>Demo</h2>
 
 ![alt text](images/demo.gif "DEMO")
+
 <hr>
-before app was run.
+
+```BEFORE QUERY```
 
 ![alt text](images/pre-query.png "pre query database")
+
 <hr>
 
-after app was run.
+```AFTER QUERY```
+
 ![alt text](images/post-query.png "post query database")
+
 <hr>
 <h2>Dependencies</h2>
 
