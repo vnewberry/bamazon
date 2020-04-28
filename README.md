@@ -8,6 +8,14 @@ Bamazon is a command line interface (CLI) application that mimics the basic func
 The app showcases the power of using SQL in conjuction with node to create a dynamic database.
 <hr>
 <h2>Demo</h2>
+![alt text](images\demo.gif "DEMO")
+<hr>
+before app was run.
+![alt text](images\pre-query.png "pre query database")
+<hr>
+
+after app was run.
+![alt text](images\post-query.png "post query database")
 <hr>
 <h2>Dependencies</h2>
 
@@ -25,7 +33,7 @@ The app showcases the power of using SQL in conjuction with node to create a dyn
 <h2>Instructions</h2>
 Step 1. Clone the repository to your computer.
 
-
+<br>
 Step 2. In the terminal locate the new directory
 
 Step 3. Install the node modules using the command `npm install`
