@@ -18,6 +18,8 @@
   },
   "homepage": "https://github.com/vnewberry/bamazon#readme",
   "dependencies": {
+    "chalk": "^4.0.0",
+    "figlet": "^1.4.0",
     "inquirer": "^7.1.0",
     "mysql": "^2.18.1"
   }
