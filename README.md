@@ -25,6 +25,7 @@ The app showcases the power of using SQL in conjuction with node to create a dyn
 <h2>Instructions</h2>
 Step 1. Clone the repository to your computer.
 
+
 Step 2. In the terminal locate the new directory
 
 Step 3. Install the node modules using the command `npm install`
