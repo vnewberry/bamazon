@@ -47,6 +47,7 @@ function buyPrompt(res) {
     ])
     .then(function (input) {
       if (input.product === "0" || input.quantity === "0") {
+          console.log(chalk.red("That was an invalid input"))
         quit("invalid");
       } else {
         noItem = false;
@@ -67,13 +68,33 @@ function buyPrompt(res) {
           ])
           .then(function (sure) {
             if (sure.confirm === "Yes") {
-              confirmPur(input);
+              completePurchase(input);
             } else {
               quit("quit");
             }
           });
       }
-    });
+      function completePurchase(item){
+        var query = connection.query(
+            "SELECT * FROM products WHERE ?", {item_id: item.product}, function(err, res) {
+            if (err) {
+                console.log(err);
+            }else {
+                // console.log(res[0].stock_quantity);
+                if(res[0].stock_quantity>=item.quantity){
+                    console.log("Your purchase will cost $"+total) ;
+                    console.log("\n...processing order...") ;
+                    updateQuantity(res,input); 
+                    // console.log(res);
+                }
+                if(res[0].stock_quantity<item.quantity){
+                console.log(chalk.red("Insufficient quantity!\nSelect a different quantity, item, or exit."))
+                    quit("invalid");
+            }
+            };
+            
+        });
+        }});
 }
 function validate(num) {
   var reg = /^\d+$/;
@@ -87,7 +108,7 @@ function quit(arg) {
         .prompt([
           {
             type: "list",
-            message: "That was an invalid input?\nWould you like to quit?",
+            message: "Would you like to quit?",
             choices: ["Yes", "No"],
             name: "done",
           },
@@ -123,3 +144,54 @@ function quit(arg) {
       break;
   }
 }
+function updateQuantity(res,item){
+// console.log("res"+res[0].stock_quantity,"item"+item.quantity+item.product);
+       
+    connection.query(
+        "UPDATE products SET ? WHERE ?",
+        [
+            {
+                stock_quantity: res[0].stock_quantity-item.quantity
+            },
+            {
+                item_id:item.product
+            }
+        ],
+        function(err,res){
+            if(err) throw err;
+            console.log(res.message);
+            
+        }
+        
+    )
+    console.log(chalk.yellow.bold("\n" + item.quantity + " " + res[0].product_name + " Purchased! \nTotal: $" + item.quantity*res[0].price + "\n"));
+    promptAgain();
+}
+function promptAgain(){
+    inquirer
+    .prompt([
+      {
+        type: "list",
+        message: "Would you like to make another purchase?",
+        choices: ["Yes", "No"],
+        name: "again",
+      },
+    ])
+    .then(function (input) {
+      if (input.again === "Yes") {
+        appLoad();
+      } else {
+        
+        figlet("GOOD BYE!", function (err, data) {
+            if (err) {
+              console.log("Something went wrong...");
+              console.dir(err);
+              return;
+            }
+            console.log(chalk.green(data));
+          });
+          connection.end();
+      }
+    });
+}
+
