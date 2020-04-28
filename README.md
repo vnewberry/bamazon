@@ -8,9 +8,11 @@ Bamazon is a command line interface (CLI) application that mimics the basic func
 The app showcases the power of using SQL in conjuction with node to create a dynamic database.
 <hr>
 <h2>Demo</h2>
+
 ![alt text](images/demo.gif "DEMO")
 <hr>
 before app was run.
+
 ![alt text](images/pre-query.png "pre query database")
 <hr>
 
